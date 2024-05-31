@@ -127,7 +127,7 @@ export class FrameSelectors {
       const injectedScript = await context.injectedScript();
       const handle = await injectedScript.evaluateHandle((injected, { info, scope, selectorString }) => {
         const element = injected.querySelector(info.parsed, scope || document, info.strict);
-        if (element && element.nodeName !== 'IFRAME' && element.nodeName !== 'FRAME')
+        if (element && element.nodeName !== 'IFRAME' && element.nodeName !== 'FRAME' && element.nodeName !== 'EMBED')
           throw injected.createStacklessError(`Selector "${selectorString}" resolved to ${injected.previewNode(element)}, <iframe> was expected`);
         return element;
       }, { info, scope: i === 0 ? scope : undefined, selectorString: stringifySelector(info.parsed) });
